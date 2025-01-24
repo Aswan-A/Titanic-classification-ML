@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap">
     <style>
         /* General Reset */
-        body, html {
+        body,
+        html {
             margin: 0;
             padding: 0;
             font-family: 'Lora', serif;
@@ -17,18 +19,22 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-image: url('https://www.bochcenter.org/assets/img/titanic-header-bdd1c2a263.jpg');
+            background-image: url("{{ url_for('static', filename='bg.jpeg') }}");
             background-size: cover;
+
             background-position: center top;
             background-attachment: fixed;
         }
 
         .overlay {
             display: flex;
-            justify-content: space-between; /* Align form and right-side box */
+            justify-content: space-between;
+            /* Align form and right-side box */
             align-items: flex-start;
-            background: rgba(0, 0, 0, 0.8); /* Darker overlay for better contrast */
-            padding: 15px 30px; /* Increased padding */
+            background: rgba(0, 0, 0, 0.8);
+            /* Darker overlay for better contrast */
+            padding: 40px 30px;
+            /* Increased padding */
             border-radius: 15px;
             width: 90%;
             max-width: 1000px;
@@ -41,7 +47,7 @@
             text-align: center;
             color: #f39c12;
             font-size: 2.5rem;
-            margin-bottom: 10px;
+            margin-bottom: 30px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
             display: flex;
             align-items: center;
@@ -55,7 +61,8 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
-            width: 100%; /* Take up 100% of the overlay width */
+            width: 100%;
+            /* Take up 100% of the overlay width */
         }
 
         label {
@@ -63,7 +70,8 @@
             color: #f8f9fa;
         }
 
-        input, select {
+        input,
+        select {
             padding: 10px;
             font-size: 1rem;
             border: none;
@@ -72,12 +80,14 @@
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
-        input:hover, select:hover {
+        input:hover,
+        select:hover {
             transform: scale(1.02);
             box-shadow: 0 4px 6px rgba(243, 156, 18, 0.4);
         }
 
-        input:focus, select:focus {
+        input:focus,
+        select:focus {
             box-shadow: 0 0 10px rgba(243, 156, 18, 0.7);
         }
 
@@ -90,6 +100,7 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            margin-top: 15px;
             transition: background-color 0.3s ease, transform 0.2s ease;
         }
 
@@ -105,6 +116,7 @@
         /* Result Section */
         .result {
             margin-top: 30px;
+            margin-bottom: 20px;
             text-align: center;
             font-size: 1.8rem;
             font-weight: bold;
@@ -116,14 +128,16 @@
         }
 
         .result.failed {
-            background-color: rgba(220, 53, 69, 0.8); /* Red background for failure */
+            background-color: rgba(220, 53, 69, 0.8);
+            /* Red background for failure */
         }
 
         .credits {
-            margin-top: 10px;
+            margin-top: 25px;
             text-align: center;
             font-size: 1rem;
             color: #f8f9fa;
+            margin-bottom: 15px;
         }
 
         .credits span {
@@ -136,7 +150,8 @@
             position: absolute;
             top: 28%;
             right: 10%;
-            background: rgba(0, 0, 0, 0.8); /* Same dark background as overlay */
+            background: rgba(0, 0, 0, 0.8);
+            /* Same dark background as overlay */
             padding: 20px;
             border-radius: 10px;
             width: 250px;
@@ -147,7 +162,8 @@
         }
 
         .did-you-know-box h3 {
-            color: #f39c12; /* Matching color with title */
+            color: #f39c12;
+            /* Matching color with title */
             font-size: 1.5rem;
             margin-bottom: 10px;
         }
@@ -160,6 +176,7 @@
         }
     </style>
 </head>
+
 <body>
 
     <div class="overlay">
@@ -177,10 +194,12 @@
                 <input type="number" name="Age" id="Age" placeholder="Enter age in years" min="0" required>
 
                 <label for="SibSp">Number of Siblings/Spouses Aboard</label>
-                <input type="number" name="SibSp" id="SibSp" placeholder="Number of siblings/spouses aboard the Titanic" min="0" required>
+                <input type="number" name="SibSp" id="SibSp" placeholder="Number of siblings/spouses aboard the Titanic"
+                    min="0" required>
 
                 <label for="Parch">Number of Parents/Children Aboard</label>
-                <input type="number" name="Parch" id="Parch" placeholder="Number of parents/children aboard the Titanic" min="0" required>
+                <input type="number" name="Parch" id="Parch" placeholder="Number of parents/children aboard the Titanic"
+                    min="0" required>
 
                 <label for="Fare">Fare (Amount Paid)</label>
                 <input type="number" name="Fare" id="Fare" placeholder="Enter fare amount" min="0" required>
@@ -200,12 +219,12 @@
 
                 <button type="submit" class="btn">Submit</button>
             </form>
-            
+
             <!-- Prediction Result Section -->
             {% if prediction %}
-                <div class="result {% if prediction == 'Did not Survive' %}failed{% endif %}">
-                    Prediction: <span>{{ prediction }}</span>
-                </div>
+            <div class="result {% if prediction == 'Did not Survive' %}failed{% endif %}">
+                Prediction: <span>{{ prediction }}</span>
+            </div>
             {% endif %}
 
             <!-- Made with love part -->
@@ -226,18 +245,18 @@
 
     <script>
         // Dynamic facts that change every few seconds
-       const facts = [
-    "Titanic's first-class suites cost over $2,500, a fortune at the time.",
-    "The ship had a real-life 'unsinkable' reputation before its fateful voyage.",
-    "Titanic carried over 2,200 passengers and crew but had lifeboats for only 1,178.",
-    "Titanic's iceberg collision took just 37 seconds to sink the ship.",
-    "The ship's band played on even as Titanic sank, trying to keep passengers calm.",
-    "Titanic's captain, Edward Smith, went down with the ship, as was his duty.",
-    "The iceberg that sank Titanic was spotted by lookouts but was too close to avoid.",
-    "Titanic's final SOS message was sent 15 minutes after hitting the iceberg.",
-    "Titanic's wreck lies over 12,000 feet beneath the ocean surface.",
-    "Titanic's maiden voyage was her only voyage, lasting only four days."
-];
+        const facts = [
+            "Titanic's first-class suites cost over $2,500, a fortune at the time.",
+            "The ship had a real-life 'unsinkable' reputation before its fateful voyage.",
+            "Titanic carried over 2,200 passengers and crew but had lifeboats for only 1,178.",
+            "Titanic's iceberg collision took just 37 seconds to sink the ship.",
+            "The ship's band played on even as Titanic sank, trying to keep passengers calm.",
+            "Titanic's captain, Edward Smith, went down with the ship, as was his duty.",
+            "The iceberg that sank Titanic was spotted by lookouts but was too close to avoid.",
+            "Titanic's final SOS message was sent 15 minutes after hitting the iceberg.",
+            "Titanic's wreck lies over 12,000 feet beneath the ocean surface.",
+            "Titanic's maiden voyage was her only voyage, lasting only four days."
+        ];
 
 
         let currentFactIndex = 0;
@@ -268,11 +287,11 @@
                 return false;
             }
 
-           
+
 
             // Display the prediction result
             document.getElementById("prediction-text").textContent = prediction;
-            
+
             // Apply red background if did not survive
             if (prediction === "Did not Survive") {
                 document.getElementById("prediction-result").classList.add("failed");
@@ -287,4 +306,5 @@
     </script>
 
 </body>
+
 </html>
