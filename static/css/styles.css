@@ -1,31 +1,46 @@
-body, html {
+/* Common Styling for Body */
+body,
+html {
     margin: 0;
     padding: 0;
     font-family: 'Lora', serif;
     background-color: #1b2a41;
     color: #f8f9fa;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
     background-image: url("../bg.jpeg");
     background-size: cover;
     background-position: center top;
     background-attachment: fixed;
+    display: flex;
+    /* Enables flexbox */
+    flex-direction: column;
+    /* Centers elements in a column (you can remove this if you prefer row layout) */
+    justify-content: center;
+    /* Centers content horizontally */
+    align-items: center;
+    /* Centers content vertically */
+    height: 100vh;
+    /* Ensure body takes full viewport height */
 }
 
+
+
+/* Overlay (Form Container) Styling */
 .overlay {
     display: flex;
     flex-direction: column;
+    margin-top: 2.5px;
+    margin-bottom: 2.5px;
     align-items: center;
     background: rgba(0, 0, 0, 0.8);
     padding: 30px;
+    padding-bottom: 20px;
     border-radius: 15px;
-    width: 90%;
-    max-width: 500px;
+    width: 100%;
+    /* Ensures full width of container */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
+/* Title Styling */
 .title {
     text-align: center;
     color: #f39c12;
@@ -38,20 +53,33 @@ body, html {
     display: flex;
     flex-direction: column;
     width: 100%;
+    /* Ensures form takes full width of its parent container */
     gap: 15px;
+    box-sizing: border-box;
+    /* Ensures padding is included in width */
 }
 
-label {
-    font-size: 1rem;
+/* Ensure the .form-section takes full width of the container */
+.form-section {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    /* Ensures it occupies the full width available */
+    gap: 15px;
+    box-sizing: border-box;
+    /* Includes padding and border within width */
 }
 
-input, select {
+/* Input and select styling */
+input,
+select {
     padding: 10px;
     font-size: 1rem;
     border: none;
     border-radius: 5px;
 }
 
+/* Button Styling */
 .btn {
     padding: 12px;
     font-size: 1.1rem;
@@ -62,6 +90,7 @@ input, select {
     cursor: pointer;
 }
 
+/* Result Section Styling */
 .result {
     margin-top: 20px;
     text-align: center;
@@ -77,6 +106,7 @@ input, select {
     background-color: rgba(220, 53, 69, 0.8);
 }
 
+/* Credits Section */
 .credits {
     margin-top: 20px;
     text-align: center;
@@ -84,15 +114,19 @@ input, select {
     color: #f8f9fa;
 }
 
+/* "Did You Know?" Box */
 .did-you-know-box {
     position: absolute;
-    top: 10%;
-    right: 10%;
     background: rgba(0, 0, 0, 0.8);
     padding: 20px;
     border-radius: 10px;
-    width: 80%;
     max-width: 250px;
+    width: 40%;
+    /* Set the width of the box */
+    top: 200px;
+    /* Move the box slightly up */
+    right: 150px;
+    /* Move the box towards the right */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
@@ -102,17 +136,59 @@ input, select {
     margin-bottom: 10px;
 }
 
+/* Mobile Layout - Responsive Design */
 @media (max-width: 768px) {
+
+    body,
+    html {
+        padding: 2.5px 20px 50px 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        min-height: 100vh;
+        overflow-x: hidden;
+        /* To prevent horizontal scrolling */
+    }
+
     .overlay {
-        width: 95%;
+        width: 90%;
+        max-width: 400px;
+        margin-bottom: 20px;
     }
 
     .title {
         font-size: 1.8rem;
     }
 
+    .form {
+        gap: 25px;
+    }
+
+    .btn {
+        font-size: 1.2rem;
+    }
+
     .did-you-know-box {
         position: static;
+        /* Ensures it's part of the document flow */
+        width: 80%;
+        /* Adjust width to be more appropriate */
+        max-width: 300px;
+        /* Restricts the max width */
+        height: 300px;
+        /* Set a fixed height */
+        text-align: center;
+        margin-bottom: 20px;
+        /* Give space below */
+        padding: 20px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        border-radius: 10px;
         margin-top: 20px;
+        /* Optional: adds space from previous content */
+
+
     }
+
+
 }
